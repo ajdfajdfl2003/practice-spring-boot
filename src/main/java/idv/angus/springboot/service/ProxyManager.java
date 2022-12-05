@@ -15,8 +15,15 @@ public class ProxyManager {
     }
 
     @Cacheable(value = "proxy", key = "#name")
-//    @Cacheable(value = "proxy")
     public String get(String name) {
+        MapSqlParameterSource paramMap = new MapSqlParameterSource();
+        paramMap.addValue("proxyName", name);
+
+        return jdbcTemplate.queryForObject("SELECT CONF_VALUE FROM PROXY_CONFIG WHERE CONF_NAME = :proxyName", paramMap, String.class);
+    }
+
+    @Cacheable(value = "proxy", key = "#name")
+    public String getA(String name) {
         MapSqlParameterSource paramMap = new MapSqlParameterSource();
         paramMap.addValue("proxyName", name);
 

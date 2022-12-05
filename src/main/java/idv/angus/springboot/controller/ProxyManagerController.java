@@ -15,6 +15,11 @@ public class ProxyManagerController {
         this.manager = manager;
     }
 
+    @GetMapping("/A/{key}")
+    public String getA(@PathVariable String key) {
+        return manager.getA(key);
+    }
+
     @GetMapping("/{key}")
     public String get(@PathVariable String key) {
         return manager.get(key);
